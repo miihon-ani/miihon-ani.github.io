@@ -1,0 +1,26 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+	$(".chara-icon").on("click",function(){
+		$(this).toggleClass("selected");
+	});
+});
+console.log("fuga");
+</script>
+<style>
+.chara-icon{
+    filter: grayscale(100%);
+}
+.selected{
+    filter: none;
+}
+</style>
+<meta name="viewport" content="width=device-width, minimum-scale=0.1">
+<title>テスト用</title>
+</head>
+<body>
+<img class="chara-icon" src="./uploaded.png">
+</body>
+</html>
