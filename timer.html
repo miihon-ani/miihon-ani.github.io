@@ -1,0 +1,41 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, minimum-scale=0.1">
+<title>テスト的な</title>
+</head>
+<body>
+<div>
+	<span>Turn:</span><span id="turn">0</span><span>　Dam:</span><span id="dam">0</span><span id="nowdam">(+0)</span>
+</div>
+<div>
+	<span>Atk:</span><span id="atk">1341</span><span>　Spd:</span><span id="spd">398</span><span>　Count:</span><span id="count">0</span>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+<script>
+var hoge = {};
+$(function () {
+	hoge.turn = 0;
+	hoge.count = 0;
+	hoge.dam = 0;
+	setInterval(function(){
+		// 内部ターン
+		hoge.turn++;
+		$('#turn').text(hoge.turn);
+		
+		// カウント
+		hoge.count += $('#spd').text() | 0; // 適当なキャストだけどテストなので続行
+		if(hoge.count >= 10000){
+			hoge.count -= 10000;
+
+			var dam_freq = (Math.random() * 2 + 9) / 10; // 0.9<=n<1.1
+			var nowdam = Math.floor(($('#atk').text() | 0) * dam_freq);
+			$('#nowdam').text("(+"+nowdam+","+dam_freq+")");
+			hoge.dam += nowdam;
+			$('#dam').text(hoge.dam);
+		}
+		$('#count').text(hoge.count);
+	}, 50);
+});
+</script>
+</body>
+</html>
