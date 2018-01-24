@@ -34,7 +34,7 @@ function setup() {
 
   //Create the cat sprite
 //  let clowry = new PIXI.Sprite(PIXI.loader.resources["character/uploaded.png"].texture);
-  var clowry = new PIXI.filters.DisplacementFilter(PIXI.Sprite.fromImage("character/uploaded.png"));
+  var clowry = new PIXI.filters.GrayFilter(PIXI.Sprite.fromImage("character/uploaded.png"));
   //Add the cat to the stage
   app.stage.addChild(clowry);
 }
