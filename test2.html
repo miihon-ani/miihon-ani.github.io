@@ -2,48 +2,42 @@
 <head>
 <meta name="viewport" content="width=device-width, minimum-scale=0.1">
 <title>テスト的な</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-<!-- <img class="chara-icon" src="./character/uploaded.png"> -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+<!-- <img class="chara-icon" src="character/uploaded.png"> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.7.0/pixi.min.js"></script>
 <script>
-    var width = 640;    // 描画エリアのサイズ
-    var height = 800;
-    var params = {
-        backgroundColor: 0xa0a0a0   // 背景色の指定（灰色）
-    };
-    var renderer = PIXI.autoDetectRenderer(width, height, params);  // レンダラー生成
+//Create a Pixi Application
+let app = new PIXI.Application({ 
+    antialias: true,    // default: false
+    transparent: false, // default: false
+    resolution: 1       // default: 1
+  }
+);
 
-    // DOM操作にjQueryを使用するので事前に読み込んでおくこと
-    $("body").append(renderer.view);    // DOMにレンダラーのビューを追加
+//Add the canvas that Pixi automatically created for you to the HTML document
+document.body.appendChild(app.view);
 
-    var stage = new PIXI.Container();   // ステージを生成
-    renderer.render(stage);     // レンダラーにステージを描画させる
-    
+app.renderer.view.style.position = "absolute";
+app.renderer.view.style.display = "block";
+app.renderer.autoResize = true;
+app.renderer.resize(window.innerWidth, window.innerHeight);
 
+//load an image and run the `setup` function when it's done
+PIXI.loader
+  .add("character/uploaded.png")
+  .load(setup);
 
-    // テキストスタイル
-var style = new PIXI.TextStyle({
-    fontSize: 80,
-    fontWeight: "bold",
-    fill: 0xffffff,
-    fontFamily: "hm_tb"
-});
+//This `setup` function will run when the image has loaded
+function setup() {
 
-// テキストからスプライトを生成
-var sprite = new PIXI.Text("Qiita", style);
-
-sprite.anchor.set(0.5);     // 基準点をスプライトの中心にセットする
-sprite.x = width / 2;       // スプライトの座標をステージの中心にする
-sprite.y = height / 2;
-sprite.alpha = 0.2;
-
-
-stage.addChild(sprite);     // スプライトをステージに追加
-
-renderer.render(stage);  // ステージ描画
-
+  //Create the cat sprite
+  let clowry = new PIXI.Sprite(PIXI.loader.resources["character/uploaded.png"].texture);
+  
+  //Add the cat to the stage
+  app.stage.addChild(clowry);
+}
 </script>
 </body>
 </html>
