@@ -30,7 +30,7 @@ var clowry = PIXI.Sprite.fromImage('data:image/png;base64,iVBORw0KGgoAAAANSUhEUg
 clowry.interactive = true;
 clowry.anchor.set(0.5);
 clowry.buttonMode = true;
-clowry.on('pointerdown', onClickClowry);
+clowry.on('click', onClickClowry);
 
 container.addChild(clowry);
 app.stage.addChild(container);
@@ -67,7 +67,7 @@ var help = new PIXI.Text('Click or tap to turn 黒瓜屋さん on / off.', {
 help.y = app.screen.height - 30;
 help.x = 10;
 help.interactive = true;
-help.on('pointerdown', onClickHelp);
+help.on('rightclick', onClickHelp);
 
 function onClickHelp () {
     help.text = 'Click or tap to turn クロゥリアさん on / off.';
@@ -114,7 +114,7 @@ app.ticker.add(function(delta) {
     // just for fun, let's rotate mrs clowry a little
     // delta is 1 if running at 100% performance
     // creates frame-independent tranformation
-    clowry.rotation += 0.005 * delta;
+//    clowry.rotation += 0.005 * delta;
 });
 </script>
 </body>
