@@ -37,14 +37,13 @@ app.stage.addChild(container);
 
 var filter = new PIXI.filters.ColorMatrixFilter();
 filter.grayscale(0.2);
-container.filters = [filter];
+container.filters = ~~localStorage.crowry ? null : [filter];
 
-var enabled = true;
 var click_count = 0;
 var click = {};
 function onClickClowry () {
-    enabled = !enabled;
-    container.filters = enabled ? [filter] : null;
+    localStorage.crowry ^= 1;
+    container.filters = ~~localStorage.crowry ? null : [filter];
     
     // 一秒間に6回タッチ判定
     click_count++;
@@ -69,8 +68,10 @@ help.x = 10;
 help.interactive = true;
 help.on('rightclick', onClickHelp);
 
+localStorage.visit_count = ~~localStorage.visit_count + 1;
 function onClickHelp () {
-    help.text = 'Click or tap to turn クロゥリアさん on / off.';
+    var visit_mes = 'You have visited ' + localStorage.visit_count + ' times.'
+    help.text = 'Click or tap to turn クロゥリアさん on / off. ' + visit_mes;
 }
 
 var help2 = new PIXI.Text('make PNG(PC Only)', {
@@ -116,6 +117,7 @@ app.ticker.add(function(delta) {
     // creates frame-independent tranformation
 //    clowry.rotation += 0.005 * delta;
 });
+
 </script>
 </body>
 </html>
