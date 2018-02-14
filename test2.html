@@ -30,7 +30,7 @@ var clowry = PIXI.Sprite.fromImage('data:image/png;base64,iVBORw0KGgoAAAANSUhEUg
 clowry.interactive = true;
 clowry.anchor.set(0.5);
 clowry.buttonMode = true;
-clowry.on('click', onClickClowry);
+clowry.on('pointerdown', onClickClowry);
 
 container.addChild(clowry);
 app.stage.addChild(container);
@@ -66,7 +66,7 @@ var help = new PIXI.Text('Click or tap to turn 黒瓜屋さん on / off.', {
 help.y = app.screen.height - 30;
 help.x = 10;
 help.interactive = true;
-help.on('rightclick', onClickHelp);
+help.on('pointerdown', onClickHelp);
 
 localStorage.visit_count = ~~localStorage.visit_count + 1;
 function onClickHelp () {
@@ -81,7 +81,7 @@ var help2 = new PIXI.Text('make PNG(PC Only)', {
     fill: 'white'
 });
 help2.interactive = true;
-help2.on('pointerdown', onClickHelp2);
+help2.on('rightclick', onClickHelp2);
 
 function onClickHelp2 () {
     var canvas = document.querySelector('canvas');
